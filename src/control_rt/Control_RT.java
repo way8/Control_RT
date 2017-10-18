@@ -20,6 +20,7 @@ public class Control_RT {
         LinearActuator lin = new LinearActuator();
         lin.setDir(1);
         lin.la_move(args);
+        System.out.println("probujemy z gitem");
     }
     
 }

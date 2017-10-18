@@ -9,13 +9,13 @@ package control_rt;
  *
  * @author HP_
  */
-public class Control_RT {
+public class Prooba {
 
     /**
      * @param args the command line arguments
      * @throws java.lang.InterruptedException
      */
-    public static void main(String[] args) throws InterruptedException {
+    public static void prooba(String[] args) throws InterruptedException {
         
         LinearActuator lin = new LinearActuator();
         lin.setDir(1);

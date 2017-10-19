@@ -22,23 +22,23 @@ public class LinearActuator {
         }
     
             
-        public void la_move(String[] args) throws InterruptedException {
+        public void laMove(String[] args) throws InterruptedException {
 
     
         // create GPIO controller instance
-        GpioController gpio = GpioFactory.getInstance();
+        GpioController laGpio = GpioFactory.getInstance();
 
-        // All Raspberry Pi models support a hardware PWM pin on GPIO_01.
+        // All Raspberry Pi models support a hardware PWM laPin on GPIO_01.
         // Raspberry Pi models A+, B+, 2B, 3B also support hardware PWM pins: GPIO_23, GPIO_24, GPIO_26
         //
-        // by default we will use gpio pin #01; however, if an argument
-        // has been provided, then lookup the pin by address
-        Pin pin = CommandArgumentParser.getPin(
-                RaspiPin.class,    // pin provider class to obtain pin instance from
-                RaspiPin.GPIO_01,  // default pin if no pin argument found
+        // by default we will use laGpio laPin #01; however, if an argument
+        // has been provided, then lookup the laPin by address
+        Pin laPin = CommandArgumentParser.getPin(
+                RaspiPin.class,    // laPin provider class to obtain laPin instance from
+                RaspiPin.GPIO_23,  // default laPin if no laPin argument found
                 args);             // argument array to search in
 
-        GpioPinPwmOutput pwm = gpio.provisionPwmOutputPin(pin);
+        GpioPinPwmOutput laPwm = laGpio.provisionPwmOutputPin(laPin);
 
         // you can optionally use these wiringPi methods to further customize the PWM generator
         // see: http://wiringpi.com/reference/raspberry-pi-specifics/
@@ -48,13 +48,13 @@ public class LinearActuator {
 
       
          final GpioPinDigitalOutput[] pins = {
-              gpio.provisionDigitalOutputPin(RaspiPin.GPIO_02, PinState.HIGH),
-              gpio.provisionDigitalOutputPin(RaspiPin.GPIO_03, PinState.HIGH)};
+              laGpio.provisionDigitalOutputPin(RaspiPin.GPIO_02, PinState.HIGH),
+              laGpio.provisionDigitalOutputPin(RaspiPin.GPIO_03, PinState.HIGH)};
         
         
         // set the PWM rate to 500
-        pwm.setPwm(800);
-         System.out.println("PWM rate is: " + pwm.getPwm());
+        laPwm.setPwm(800);
+         System.out.println("PWM rate is: " + laPwm.getPwm());
 
          
         switch (dir) {
@@ -75,11 +75,11 @@ public class LinearActuator {
         Thread.sleep(2000);
         
         //turn off PWM
-        pwm.setPwm(0);
+        laPwm.setPwm(0);
         System.out.println("Koniec");
         // stop all GPIO activity/threads by shutting down the GPIO controller
         // (this method will forcefully shutdown all GPIO monitoring threads and scheduled tasks)
-        gpio.shutdown();
+        laGpio.shutdown();
     }
 
     

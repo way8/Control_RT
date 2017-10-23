@@ -17,9 +17,9 @@ public class Prooba {
      */
     public static void prooba(String[] args) throws InterruptedException {
         
-        LinearActuator lin = new LinearActuator();
-        lin.setDir(1);
-        lin.la_move(args);
+       // LinearActuator lin = new LinearActuator();
+       // lin.setDir(1);
+       // lin.laMove(args);
         System.out.println("probujemy z gitem");
     }
     

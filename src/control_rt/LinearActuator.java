@@ -22,7 +22,7 @@ public class LinearActuator {
         }
     
             
-        public void laMove(String[] args) throws InterruptedException {
+        public void laMove() {
 
     
         // create GPIO controller instance
@@ -35,8 +35,8 @@ public class LinearActuator {
         // has been provided, then lookup the laPin by address
         Pin laPin = CommandArgumentParser.getPin(
                 RaspiPin.class,    // laPin provider class to obtain laPin instance from
-                RaspiPin.GPIO_23,  // default laPin if no laPin argument found
-                args);             // argument array to search in
+                RaspiPin.GPIO_23  // default laPin if no laPin argument found
+                );             // argument array to search in
 
         GpioPinPwmOutput laPwm = laGpio.provisionPwmOutputPin(laPin);
 
@@ -68,18 +68,23 @@ public class LinearActuator {
          pins[0].high();
          pins[1].low();
          break;
+     case 3: 
+        System.out.println("Stop");
+         pins[1].high();
+         pins[1].low();
+         break;
         default:
          System.out.println("Nie rozumiem");
 }
                                            
-        Thread.sleep(2000);
+       // Thread.sleep(2000);
         
         //turn off PWM
-        laPwm.setPwm(0);
-        System.out.println("Koniec");
+      //  laPwm.setPwm(0);
+      //  System.out.println("Koniec");
         // stop all GPIO activity/threads by shutting down the GPIO controller
         // (this method will forcefully shutdown all GPIO monitoring threads and scheduled tasks)
-        laGpio.shutdown();
+      //  laGpio.shutdown();
     }
 
     

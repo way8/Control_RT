@@ -26,15 +26,7 @@ public class Invereter {
      */
     public static void invMove(String[] args) throws InterruptedException {
 
-        // create Pi4J console wrapper/helper
-        // (This is a utility class to abstract some of the boilerplate code)
-        final Console console = new Console();
-
-        // print program title/header
-        console.title("<-- The Pi4J Project -->", "PWM Example");
-
-        // allow for user to exit program using CTRL-C
-        console.promptForExit();
+    
 
         // create GPIO controller instance, 
         //GpioController invGpio deklaracja obiektu invGpio, jest typu interfejsu GpioController, 
@@ -74,17 +66,17 @@ invGpio.provisionDigitalOutputPin(RaspiPin.GPIO_04, PinState.LOW)};// F/R   22
          pins[0].low();
          pins[1].high();
          pins[2].low();        
-        console.println("PWM rate is: " + invPwm.getPwm() + " Engine is running forward");
+        
          Thread.sleep(20000);
        
    // set the PWM rate to 500, 1000==1
          invPwm.setPwm(80);
-         console.println("PWM rate is: " + invPwm.getPwm() + " Engine is running forward");
+        
          Thread.sleep(15000);
          
          pins[1].low();
          invPwm.setPwm(0);
-         console.println("Engine is braking"); 
+        
          Thread.sleep(3000);   
      
 

@@ -58,18 +58,19 @@ import com.pi4j.io.i2c.I2CFactory.UnsupportedBusNumberException;
  * @author Robert Savage
  */
 public class Potentiometer {
-
+    
+      double prob;
+    
     /**
      *
-     * @param args
-     * @return
+     * 
      * @throws InterruptedException
      * @throws UnsupportedBusNumberException
      * @throws IOException
      */
-    public static void main(String args[]) throws InterruptedException, UnsupportedBusNumberException, IOException {
+    public static void getElavation() throws InterruptedException, UnsupportedBusNumberException, IOException {
 
-        System.out.println("<--Pi4J--> ADS1015 GPIO Example ... started.");
+        
 
         // number formatters
         final DecimalFormat df = new DecimalFormat("#.##");
@@ -127,28 +128,36 @@ public class Potentiometer {
 
                 // approximate voltage ( *scaled based on PGA setting )
                 double voltage = gpioProvider.getProgrammableGainAmplifier(event.getPin()).getVoltage() * (percent/100);
-
-                // display output
-                System.out.println(" (" + event.getPin().getName() +") : VOLTS=" + df.format(voltage) + "  | PERCENT=" + pdf.format(percent) + "% | RAW=" + value + "       ");
+                
+                //create new object to get the voltage form thic absolute class
+                Data volt= new Data();
+                volt.setVoltageCheck(voltage);
+                
+           // display output
+           //     System.out.println(" (" + event.getPin().getName() +") : VOLTS=" + df.format(voltage) + "  | PERCENT=" + pdf.format(percent) + "% | RAW=" + value + "       ");
                 
                  
             }
+           
         };
 
-        myInputs[0].addListener(listener);
+            myInputs[0].addListener(listener);
 //        myInputs[1].addListener(listener);
 //        myInputs[2].addListener(listener);
 //        myInputs[3].addListener(listener);
-
+       
         // keep program running for 10 minutes
-        Thread.sleep(600000);
+     //   Thread.sleep(600000);
 
         // stop all GPIO activity/threads by shutting down the GPIO controller
         // (this method will forcefully shutdown all GPIO monitoring threads and scheduled tasks)
-        gpio.shutdown();
+     //   gpio.shutdown();
 
-        System.out.println("Exiting ADS1015GpioExample");
+      //  System.out.println("Exiting ADS1015GpioExample");
     
         }
+    
+
+   
 }
 

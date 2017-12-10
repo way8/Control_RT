@@ -5,6 +5,11 @@
  */
 package control_rt;
 
+import com.pi4j.io.i2c.I2CFactory;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author szieba
@@ -24,8 +29,16 @@ public class GUI extends javax.swing.JFrame {
     }
 
 private void displayElevation() {                                         
-        String proo = Display2.getText();
-        Display.setText(proo);
+       
+    try {
+            pot.getElavation();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (I2CFactory.UnsupportedBusNumberException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
     }    
@@ -106,8 +119,8 @@ private void displayElevation() {
                 .addContainerGap(15, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(Display, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(123, 123, 123))
+                .addComponent(Display, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,8 +159,10 @@ private void displayElevation() {
     }//GEN-LAST:event_DisplayActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-                String proo = Display2.getText();
-                Display.setText(proo);
+            
+            String c = String.valueOf(Potentiometer.prob);
+            Display.setText(c);
+            
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
 

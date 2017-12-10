@@ -59,7 +59,7 @@ import com.pi4j.io.i2c.I2CFactory.UnsupportedBusNumberException;
  */
 public class Potentiometer {
     
-      double prob;
+      static double prob;
     
     /**
      *
@@ -73,8 +73,8 @@ public class Potentiometer {
         
 
         // number formatters
-        final DecimalFormat df = new DecimalFormat("#.##");
-        final DecimalFormat pdf = new DecimalFormat("###.#");
+//        final DecimalFormat df = new DecimalFormat("#.##");
+//        final DecimalFormat pdf = new DecimalFormat("###.#");
 
         // create gpio controller
         final GpioController gpio = GpioFactory.getInstance();
@@ -129,9 +129,7 @@ public class Potentiometer {
                 // approximate voltage ( *scaled based on PGA setting )
                 double voltage = gpioProvider.getProgrammableGainAmplifier(event.getPin()).getVoltage() * (percent/100);
                 
-                //create new object to get the voltage form thic absolute class
-                Data volt= new Data();
-                volt.setVoltageCheck(voltage);
+                    prob = voltage;
                 
            // display output
            //     System.out.println(" (" + event.getPin().getName() +") : VOLTS=" + df.format(voltage) + "  | PERCENT=" + pdf.format(percent) + "% | RAW=" + value + "       ");
@@ -141,7 +139,7 @@ public class Potentiometer {
            
         };
 
-            myInputs[0].addListener(listener);
+          myInputs[0].addListener(listener);
 //        myInputs[1].addListener(listener);
 //        myInputs[2].addListener(listener);
 //        myInputs[3].addListener(listener);
